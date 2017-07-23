@@ -1,0 +1,16 @@
+name: ModMode
+version: 1.0-SNAPSHOT
+main: modmode.modmode.ModMode
+prefix: ModMode
+authors: [plasticono]
+description: ModMode plugin created by plasticono
+website: plastickits.us
+softdepnd: PermissionEx
+commands:
+  ss:
+  v:
+  vanish:
+  mod:
+  staffmode:
+  staff:
+  invsee:
