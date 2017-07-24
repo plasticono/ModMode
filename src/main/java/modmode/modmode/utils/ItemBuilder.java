@@ -32,6 +32,14 @@ public class ItemBuilder {
         return item;
     }
 
+    public static ItemStack build(Material material, int amount, String name) {
+        ItemStack item = new ItemStack(material, amount);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatUtils.format(name));
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public static ItemStack build(Material material, int amount, int id, String name, List<String> lore) {
         ItemStack item = new ItemStack(material, amount, (short) id);
         ItemMeta meta = item.getItemMeta();

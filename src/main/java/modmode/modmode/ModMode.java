@@ -1,9 +1,6 @@
 package modmode.modmode;
 
-import modmode.modmode.commands.freezeCommand;
-import modmode.modmode.commands.invseeCommand;
-import modmode.modmode.commands.staffmodeCommand;
-import modmode.modmode.commands.vanishCommand;
+import modmode.modmode.commands.*;
 import modmode.modmode.listener.frozenListener;
 import modmode.modmode.listener.staffmodeListener;
 import org.bukkit.Bukkit;
@@ -20,7 +17,6 @@ public final class ModMode extends JavaPlugin {
     public static ArrayList<String> staff = new ArrayList<>();
     public static ArrayList<String> vanished = new ArrayList<>();
     private static ModMode instance;
-
     @Override
     public void onEnable() {
         instance = this;
@@ -31,11 +27,23 @@ public final class ModMode extends JavaPlugin {
         getCommand("staff").setExecutor(new staffmodeCommand());
         getCommand("invsee").setExecutor(new invseeCommand());
         getCommand("staffmode").setExecutor(new staffmodeCommand());
+        getCommand("staffchat").setExecutor(new staffChatCommand());
+        getCommand("sc").setExecutor(new staffChatCommand());
+        getCommand("helpop").setExecutor(new helpOPCommand());
 
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(new frozenListener(), this);
         pm.registerEvents(new staffmodeListener(), this);
+        pm.registerEvents(new staffChatCommand(), this);
 
+
+        if(!this.getServer().getPluginManager().getPlugin("PermissionsEx").isEnabled()){
+            this.getPluginLoader().disablePlugin(this);
+        }
+
+        if(!this.getServer().getPluginManager().getPlugin("WorldEdit").isEnabled()){
+            this.getPluginLoader().disablePlugin(this);
+        }
 
         getConfig().options().copyDefaults(true);
         saveConfig();
